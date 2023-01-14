@@ -25,6 +25,6 @@ public class Main {
 
         usi.dropUsersTable();
 
-        Util.sessionShutdown();
+        Util.getSessionFactory().close();
     }
 }

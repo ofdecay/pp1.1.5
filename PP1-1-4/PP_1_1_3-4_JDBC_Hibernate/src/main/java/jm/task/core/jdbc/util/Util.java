@@ -57,7 +57,7 @@ public class Util {
         return sessionFactory;
     }
 
-    public static void sessionShutdown() {
+    /*public static void sessionShutdown() {
         getSessionFactory().close();
     }
 
@@ -86,6 +86,6 @@ public class Util {
     public void closeTransactionSession() {
         transaction.commit();
         closeSession();
-    }
+    }*/
 }
 

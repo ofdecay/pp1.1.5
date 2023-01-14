@@ -9,9 +9,8 @@ import jm.task.core.jdbc.util.Util;
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
-    UserDao userDao = new UserDaoJDBCImpl();
-    UserDao userDaoHiber = new UserDaoHibernateImpl();
-    public void createUsersTable() {
+    UserDao userDaoHiber = new UserDaoHibernateImpl(); //не понял, почему неправильно.
+    public void createUsersTable() {                  //Я же создаю объект класса и обращаюсь к нему через интерфейс UserDao
         userDaoHiber.createUsersTable();
     }
 
