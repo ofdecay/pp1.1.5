@@ -28,7 +28,7 @@ public class UserDaoHibernateImpl extends Util implements UserDao {
                     "  LAST_NAME VARCHAR(45) NOT NULL," +
                     "  AGE TINYINT NOT NULL," +
                     "  PRIMARY KEY (ID))";
-            Query<User> query = session.createSQLQuery(sql);
+            TypedQuery<User> query = session.createSQLQuery(sql);
             query.executeUpdate();
             transaction.commit();
         } catch (HibernateException e) {
@@ -44,7 +44,7 @@ public class UserDaoHibernateImpl extends Util implements UserDao {
         try (Session session = Util.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
             String sql = "DROP TABLE IF EXISTS USERS_TABLE";
-            Query<User> query = session.createSQLQuery(sql);
+            TypedQuery<User> query = session.createSQLQuery(sql);
             query.executeUpdate();
             transaction.commit();
         } catch (HibernateException e) {
@@ -88,7 +88,7 @@ public class UserDaoHibernateImpl extends Util implements UserDao {
     public List<User> getAllUsers() {
         List<User> listOfUsers = new ArrayList<>();
         try (Session session = getSessionFactory().openSession()) {
-            Query<User> query = session.createQuery("from User");
+            TypedQuery<User> query = session.createQuery("from User");
             listOfUsers = query.getResultList();
         } catch (HibernateException e) {
             e.printStackTrace();
@@ -102,7 +102,7 @@ public class UserDaoHibernateImpl extends Util implements UserDao {
         try (Session session = Util.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
             String sql = "TRUNCATE TABLE USERS_TABLE";
-            Query<User> query = session.createSQLQuery(sql);
+            TypedQuery<User> query = session.createSQLQuery(sql);
             query.executeUpdate();
             transaction.commit();
         } catch (HibernateException e) {
