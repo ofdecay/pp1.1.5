@@ -9,29 +9,29 @@ import jm.task.core.jdbc.util.Util;
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
-    UserDao userDaoHiber = new UserDaoHibernateImpl(); //не понял, почему неправильно.
-    public void createUsersTable() {                  //Я же создаю объект класса и обращаюсь к нему через интерфейс UserDao
-        userDaoHiber.createUsersTable();
+    UserDao userDao = new UserDaoHibernateImpl();
+    public void createUsersTable() {
+        userDao.createUsersTable();
     }
 
     public void dropUsersTable() {
-        userDaoHiber.dropUsersTable();
+        userDao.dropUsersTable();
     }
 
     public void saveUser(String name, String lastName, byte age) {
-        userDaoHiber.saveUser(name, lastName, age);
+        userDao.saveUser(name, lastName, age);
     }
 
     public void removeUserById(long id) {
-        userDaoHiber.removeUserById(id);
+        userDao.removeUserById(id);
     }
 
     public List<User> getAllUsers() {
-        List<User> listOfUsers = userDaoHiber.getAllUsers();
+        List<User> listOfUsers = userDao.getAllUsers();
         return listOfUsers;
     }
 
     public void cleanUsersTable() {
-        userDaoHiber.cleanUsersTable();
+        userDao.cleanUsersTable();
     }
 }

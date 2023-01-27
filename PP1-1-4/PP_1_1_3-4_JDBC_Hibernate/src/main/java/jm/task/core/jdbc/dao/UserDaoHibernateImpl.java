@@ -7,7 +7,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +27,7 @@ public class UserDaoHibernateImpl extends Util implements UserDao {
                     "  LAST_NAME VARCHAR(45) NOT NULL," +
                     "  AGE TINYINT NOT NULL," +
                     "  PRIMARY KEY (ID))";
-            TypedQuery<User> query = session.createSQLQuery(sql);
+            Query<User> query = session.createNativeQuery(sql, User.class);
             query.executeUpdate();
             transaction.commit();
         } catch (HibernateException e) {
@@ -44,7 +43,7 @@ public class UserDaoHibernateImpl extends Util implements UserDao {
         try (Session session = Util.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
             String sql = "DROP TABLE IF EXISTS USERS_TABLE";
-            TypedQuery<User> query = session.createSQLQuery(sql);
+            Query<User> query = session.createNativeQuery(sql, User.class);
             query.executeUpdate();
             transaction.commit();
         } catch (HibernateException e) {
@@ -88,7 +87,7 @@ public class UserDaoHibernateImpl extends Util implements UserDao {
     public List<User> getAllUsers() {
         List<User> listOfUsers = new ArrayList<>();
         try (Session session = getSessionFactory().openSession()) {
-            TypedQuery<User> query = session.createQuery("from User");
+            Query<User> query = session.createQuery("from User", User.class);
             listOfUsers = query.getResultList();
         } catch (HibernateException e) {
             e.printStackTrace();
@@ -102,7 +101,7 @@ public class UserDaoHibernateImpl extends Util implements UserDao {
         try (Session session = Util.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
             String sql = "TRUNCATE TABLE USERS_TABLE";
-            TypedQuery<User> query = session.createSQLQuery(sql);
+            Query<User> query = session.createNativeQuery(sql, User.class);
             query.executeUpdate();
             transaction.commit();
         } catch (HibernateException e) {
